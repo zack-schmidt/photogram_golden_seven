@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get("/all_photos", { :controller => "photos", :action => "index" })
   get("/photo_details/:the_id", { :controller => "photos", :action => "show" })
 
   devise_for :admin_users, ActiveAdmin::Devise.config
