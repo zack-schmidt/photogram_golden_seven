@@ -1,26 +1,11 @@
 <h1>All Photos</h1>
 
-<div>
-  <img width="200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Tracy_Caldwell_Dyson_in_Cupola_ISS.jpg/640px-Tracy_Caldwell_Dyson_in_Cupola_ISS.jpg">
+<% @list_of_photos.each do |the_photo| %>
+  <div>
+    <img width="200" src="<%= the_photo.source %>">
 
-  <a href="/photo_details/1">
-    Show Details
-  </a>
-</div>
-
-
-<div>
-  <img width="200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Polarlicht_2.jpg/640px-Polarlicht_2.jpg">
-
-  <a href="/photo_details/2">
-    Show Details
-  </a>
-</div>
-
-<div>
-  <img width="200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Pair_of_Merops_apiaster_feeding.jpg/640px-Pair_of_Merops_apiaster_feeding.jpg">
-
-  <a href="/photo_details/3">
-    Show Details
-  </a>
-</div>
+    <a href="/photo_details/<%= the_photo.id %>">
+      Show Details
+    </a>
+  </div>
+<% end %>
