@@ -5,15 +5,17 @@
 </a>
 
 <% @list_of_photos.each do |the_photo| %>
-  <div>
-    <img width="200" src="<%= the_photo.source %>">
+  <div class="thumbnail">
+    <img src="<%= the_photo.source %>">
 
-    <a href="/photo_details/<%= the_photo.id %>">
-      Show Details
-    </a>
+    <div class="caption">
+      <a href="/photo_details/<%= the_photo.id %>" class="btn btn-default btn-block">
+        Show Details
+      </a>
 
-    <a href="/delete_photo/<%= the_photo.id %>">
-      Delete
-    </a>
+      <a href="/delete_photo/<%= the_photo.id %>" class="btn btn-default btn-block">
+        Delete
+      </a>
+    </div>
   </div>
 <% end %>
