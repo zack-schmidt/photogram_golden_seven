@@ -22,3 +22,4 @@
 
 # Ignore dotenv files
 /.env*
+/.firstdraft_student.yml

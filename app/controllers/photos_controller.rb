@@ -38,6 +38,13 @@ def update_row
   p.source = params["the_source"]
   p.caption = params["the_caption"]
   p.save
+  photo_number = params["the_id_number"]
+  redirect_to("/photos/"+photo_number)
+end
+
+def delete_row
+  d = Photo.find(params["the_id_number"])
+  d.destroy
   redirect_to("/photos")
 end
 
