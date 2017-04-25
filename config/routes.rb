@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  # CREATE
+  get("/photos/new", { :controller => "photos", :action => "new_form" })
 
+  # READ
   get("/all_photos", { :controller => "photos", :action => "index" })
   get("/photo_details/:the_id", { :controller => "photos", :action => "show" })
 
