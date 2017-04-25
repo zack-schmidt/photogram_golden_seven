@@ -303,7 +303,7 @@ feature "Edit photo form" do
     test_caption = "New caption, added at #{Time.now}"
 
     visit "/photos/#{photo.id}/edit"
-    fill_in("Caption", with: test_caption)
+    fill_in "Caption", with: test_caption
     click_on "Update Photo"
 
     photo_as_revised = Photo.find(photo.id)
@@ -318,7 +318,7 @@ feature "Edit photo form" do
     test_source = "http://new.image/source_#{Time.now.to_i}.jpg"
 
     visit "/photos/#{photo.id}/edit"
-    fill_in("Image URL", with: test_source)
+    fill_in "Image URL", with: test_source
     click_on "Update Photo"
 
     photo_as_revised = Photo.find(photo.id)
