@@ -34,3 +34,11 @@ en:
     number_to_percentage: Rails has a handy helper method called [`number_to_percentage()`](https://apidock.com/rails/ActionView/Helpers/NumberHelper/number_to_percentage) that is available within `.html.erb` files.
     params_are_strings: Raw values from the `params` hash are all `String`s, so you may have to do some conversions using methods like [`.to_i`](https://apidock.com/ruby/String/to_i) or [`.to_f`](https://apidock.com/ruby/String/to_f) or [`Date.parse()`](https://apidock.com/ruby/Date/parse/class) before you perform any computations.
     round: Ruby `Float`s have a [`.round()` method](https://apidock.com/ruby/Float/round) that you can use anywhere.
+    value_attribute: Use the `value=""` attribute to pre-populate an `<input>`.
+    embed_vs_interpolate: Remember, ERB tags `<%= %>` are only for use within `.html.erb` embedded Ruby HTML view templates. If you're trying to put together a Ruby string (like when you were trying to compose an API URL in Meteorologist), just use `+` or `#{}`.
+    redirect_vs_render: |
+                        The argument to the `render()` method is **a filename** of a `.html.erb` template file from within our `app/views` folder that we want to use to format the instance variables that we've defined within _this action_.
+
+                        The argument to the `redirect_to()` method is **a URL** that we want to send the user to which will trigger _a completely different action_.
+
+                        Don't provide the `redirect_to()` method with a filename as an argument, or vice versa.

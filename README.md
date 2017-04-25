@@ -11,6 +11,7 @@
  1. Click Publish. Verify that your branch is now visible on your fork at GitHub.com in the "Branch" dropdown.
  1. **Commit and Sync often as you work.**
  1. Make new branches freely to experiment. You can always switch back to an older branch and start over. **When in doubt, create a branch**, _especially_ before starting on a new task.
+ 1. You don't need to merge back into your master branch; just stay on whatever your best branch is, in the end. (In the real world, you would ultimately merge your best branch back into your master branch and deploy to your users.)
  1. Run `rails grade` as often as you like to see how you are doing.
  1. You can push commits and `rails grade` right up until the due date.
  1. If you have a question about your code, a great way to get feedback is to open a [Pull Request](https://help.github.com/articles/creating-a-pull-request/). After creating it, if you include the URL of your Pull Request when you post your question, reviewers will be able to easily see the changes you've made and leave comments on each line of your code with suggestions.
@@ -121,21 +122,29 @@ This action has a very simple job: draw a blank form in the user's browser for t
 
 It's been a while since we've done any forms, but let's shake off the rust and recall our Essential HTML (refer to that repository if you need to) to craft a form for a photo with two inputs: one for the image's URL and one for a caption. Complete the RCAV and add the following HTML in the view:
 
-    <h1>Add A New photo</h1>
+```html
+<form action="/create_photo">
+  <div>
+    <label for="source_input">
+      Image URL
+    </label>
 
-    <form>
-      <div>
-        <label for="photo_caption">Caption:</label>
-        <input id="photo_caption" type="text" name="the_caption">
-      </div>
-      <div>
-        <label for="photo_image_url">Image URL:</label>
-        <input id="photo_image_url" type="text" name="the_source">
-      </div>
-      <div>
-        <button>Create Photo</button>
-      </div>
-    </form>
+    <input id="source_input" type="text" name="the_source">
+  </div>
+
+  <div>
+    <label for="caption_input">
+      Caption
+    </label>
+
+    <input id="caption_input" type="text" name="the_caption">
+  </div>
+
+  <button>
+    Create Photo
+  </button>
+</form>
+```
 
 It turns out that forms, when submitted, take the values that users type in to the inputs and add them to the request. However, they do it by tacking them on to the end of the URL after a `?`, in what is called a **query string**.
 
@@ -143,11 +152,15 @@ It turns out that forms, when submitted, take the values that users type in to t
 
 In Ruby, we call a list of key/value pairs a Hash. Same thing, different notation. So
 
-    ?sport=football&color=purple
+```
+?sport=football&color=purple
+```
 
 in a URL would translate into something like
 
-    { :sport => "football", :color => "purple" }
+```
+{ :sport => "football", :color => "purple" }
+```
 
 in Ruby.
 
@@ -161,7 +174,9 @@ We need a way to pick a different URL to send the data to when the user clicks t
 
 Fortunately, we can very easily pick which URL receives the data from a form: it is determined by adding an `action` attribute to the `<form>` tag, like so:
 
-    <form action="http://localhost:3000/create_photo">
+```html
+<form action="http://localhost:3000/create_photo">
+```
 
 Think of the action attribute as being like the `href` attribute of the `<a>` tag. It determines where the user is sent after they click. The only difference between a form and a link is that when the user clicks a form, some extra data comes along for the ride, but either way, the user is sent to a new URL.
 
@@ -169,7 +184,9 @@ Of course, if you click it right now, you'll receive a "NO ROUTE MATCHES" error 
 
 #### create_row
 
-    get("/create_photo", { :controller => "photos", :action => "create_row" })
+```ruby
+get("/create_photo", { :controller => "photos", :action => "create_row" })
+```
 
 Add the action and view for that route. Put some static HTML in the view for now.
 
@@ -185,13 +202,23 @@ If the former, simply add whatever HTML to the view template you think is approp
 
 If you instead just want to send the user back to the index page immediately, try the following in the action instead of `render`:
 
-    redirect_to("http://localhost:3000/photos")
+```ruby
+redirect_to("http://localhost:3000/photos")
+```
+
+or just
+
+```ruby
+redirect_to("/photos")
+```
 
 ### DELETE (destroy)
 
-Under each photo on the index page, there is a link labeled "Delete". The markup for these links look like:
+Under each photo on the index page, add a link labeled "Delete". The markup for these links should look like:
 
-    <a href="http://localhost:3000/delete_photo/<%= photo.id %>">Delete</a>
+```html
+<a href="/delete_photo/<%= photo.id %>">Delete</a>
+```
 
 Does it make sense how that link is being put together?
 
@@ -199,7 +226,9 @@ When I click that link, the photo should be removed and I should be sent back to
 
 Write a route, action, and view to make that happen. To start you off, here's a route:
 
-    get("/delete_photo/:id", { :controller => "photos", :action => "destroy" })
+```ruby
+get("/delete_photo/:id", { :controller => "photos", :action => "destroy" })
+```
 
 ### UPDATE (edit_form, update_row)
 
@@ -207,11 +236,15 @@ Write a route, action, and view to make that happen. To start you off, here's a 
 
 Under each photo on the index page, there is a link labeled "Edit". The markup for these links look like:
 
-    <a href="http://localhost:3000/photos/<%= photo.id %>/edit">Edit</a>
+```html
+<a href="http://localhost:3000/photos/<%= photo.id %>/edit">Edit</a>
+```
 
 Add a route to support this action:
 
-    get("/photos/:id/edit", { :controller => "photos", :action => "edit_form" })
+```ruby
+get("/photos/:id/edit", { :controller => "photos", :action => "edit_form" })
+```
 
 The job of this action should be to display a form to edit an existing photo, somewhat like the `new_form` action.
 
@@ -219,19 +252,29 @@ It's a little more complicated than `new_form`, though, because instead of showi
 
 Hint: You can pre-fill an `<input>` with the `value=""` attribute; e.g.,
 
-    <input type="text" name="the_caption" value="<%= @photo.caption %>">
+```html
+<input type="text" name="the_caption" value="<%= @photo.caption %>">
+```
 
 The `action` attributes of your edit forms should look like this:
 
-    <form action="http://localhost:3000/update_photo/4">
+```html
+<form action="http://localhost:3000/update_photo/4">
+```
 
-so that when the user clicks submit, we can finally do the work of updating our database...
+so that when the user clicks submit, we can finally do the work of updating our database. But the `4` should be dynamic, not hardcoded, so embed some Ruby instead:
+
+```html
+<form action="http://localhost:3000/update_photo/<%= @photo.id %>">
+```
 
 #### update_row
 
 Add another route:
 
-    get("/update_photo/:id", { :controller => "photos", :action => "update_row" })
+```ruby
+get("/update_photo/:id", { :controller => "photos", :action => "update_row" })
+```
 
 The job of this action is to receive data from an edit form, retrieve the corresponding row from the table, and update it with the revised information. Give it a shot.
 
