@@ -1,9 +1,13 @@
 <h1>Photo Details</h1>
 
-<img src="<%= @source %>">
+<img src="<%= @photo.source %>">
 
-<p><%= @caption %></p>
+<p><%= @photo.caption %></p>
 
 <a href="/all_photos">
   Go back
+</a>
+
+<a href="/delete_photo/<%= @photo.id %>">
+  Delete
 </a>
