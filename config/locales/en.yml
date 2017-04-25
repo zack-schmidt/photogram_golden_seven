@@ -34,3 +34,4 @@ en:
     number_to_percentage: Rails has a handy helper method called [`number_to_percentage()`](https://apidock.com/rails/ActionView/Helpers/NumberHelper/number_to_percentage) that is available within `.html.erb` files.
     params_are_strings: Raw values from the `params` hash are all `String`s, so you may have to do some conversions using methods like [`.to_i`](https://apidock.com/ruby/String/to_i) or [`.to_f`](https://apidock.com/ruby/String/to_f) or [`Date.parse()`](https://apidock.com/ruby/Date/parse/class) before you perform any computations.
     round: Ruby `Float`s have a [`.round()` method](https://apidock.com/ruby/Float/round) that you can use anywhere.
+    value_attribute: Use the `value=""` attribute to pre-populate an `<input>`.
