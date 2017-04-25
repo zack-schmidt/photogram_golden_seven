@@ -25,4 +25,8 @@ class PhotosController < ApplicationController
 
     render("photos/show.html.erb")
   end
+
+  def destroy_row
+    redirect_to("/all_photos")
+  end
 end
