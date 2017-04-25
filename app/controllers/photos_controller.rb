@@ -27,7 +27,13 @@ class PhotosController < ApplicationController
   end
 
   def edit_form
+    @photo = Photo.find(params[:the_id])
+
     render("photos/edit_form.html.erb")
+  end
+
+  def update_row
+    redirect_to("/all_photos")
   end
 
   def destroy_row
