@@ -33,6 +33,13 @@ class PhotosController < ApplicationController
   end
 
   def update_row
+    p = Photo.find(params[:the_id])
+
+    p.source = params[:the_source]
+    p.caption = params[:the_caption]
+
+    p.save
+    
     redirect_to("/all_photos")
   end
 
