@@ -27,6 +27,10 @@ class PhotosController < ApplicationController
   end
 
   def destroy_row
+    p = Photo.find(params[:the_id])
+
+    p.destroy
+    
     redirect_to("/all_photos")
   end
 end
