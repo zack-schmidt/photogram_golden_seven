@@ -2,7 +2,11 @@ class PhotosController < ApplicationController
   def new_form
     render("photos/new_form.html.erb")
   end
-  
+
+  def create_row
+    render("photos/create_row.html.erb")
+  end
+
   def index
     @list_of_photos = Photo.all
 
