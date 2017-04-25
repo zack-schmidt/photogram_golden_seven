@@ -198,6 +198,16 @@ feature "New photo form" do
 end
 
 feature "New photo form" do
+  it "redirects user to index when submitted", points: 2, hint: h("redirect_vs_render") do
+    visit "/photos/new"
+
+    click_on "Create Photo"
+
+    expect(page).to have_current_path("/photos")
+  end
+end
+
+feature "Delete link" do
   it "removes a row from the table", points: 5 do
     photo = create(:photo)
 
@@ -207,8 +217,8 @@ feature "New photo form" do
   end
 end
 
-feature "New photo form" do
-  it "redirects user to the index page", points: 3 do
+feature "Delete link" do
+  it "redirects user to the index page", points: 3, hint: h("redirect_vs_render") do
     photo = create(:photo)
 
     visit "/delete_photo/#{photo.id}"
@@ -325,8 +335,10 @@ feature "Edit photo form" do
 
     expect(photo_as_revised.source).to eq(test_source)
   end
+end
 
-  it "redirects user to the show page", points: 3 do
+feature "Edit photo form" do
+  it "redirects user to the show page", points: 3, hint: h("embed_vs_interpolate redirect_vs_render") do
     photo = create(:photo)
 
     visit "/photos/#{photo.id}/edit"
