@@ -1,13 +1,5 @@
 require "rails_helper"
 
-# feature "Home page" do
-#   it "is the photos index page", points: 0, hint:  "Should always pass since starting point takes care of this" do
-#     visit "/"
-#
-#     expect(page).to have_css("h1", text: "List of Photos")
-#   end
-# end
-
 feature "Photo details page" do
   it "has a functional RCAV", points: 1 do
     photo = create(:photo)
@@ -107,6 +99,14 @@ feature "Index page" do
     photos.each do |photo|
       expect(page).to have_css("img[src*='#{photo.source}']")
     end
+  end
+end
+
+feature "Home page" do
+  it "is the photos index page", points: 3, hint: h("copy_must_match") do
+    visit "/"
+
+    expect(page).to have_css("h1", text: "All Photos")
   end
 end
 
