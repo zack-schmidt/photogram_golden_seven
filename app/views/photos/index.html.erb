@@ -1,5 +1,9 @@
 <h1>All Photos</h1>
 
+<a href="/photos/new">
+  Add a new photo
+</a>
+
 <% @list_of_photos.each do |the_photo| %>
   <div>
     <img width="200" src="<%= the_photo.source %>">
