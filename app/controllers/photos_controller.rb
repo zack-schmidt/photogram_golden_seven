@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
 
     p.save
 
-    render("photos/create_row.html.erb")
+    redirect_to("/all_photos")
   end
 
   def index
