@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get("/all_photos", { :controller => "photos", :action => "index" })
   get("/photo_details/:the_id", { :controller => "photos", :action => "show" })
 
+  # UPDATE
+  get("/edit_photo/:the_id", { :controller => "photos", :action => "edit_form" })
+
   # DELETE
   get("/delete_photo/:the_id", { :controller => "photos", :action => "destroy_row" })
 
