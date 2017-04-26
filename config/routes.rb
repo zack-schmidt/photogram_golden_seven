@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get("/update_photo/:the_id_number", { :controller => "photos", :action => "update_row"})
 
   #delete
-  get("/photos/delete_photo/:the_id_number", { :controller => "photos", :action => "delete_row"})
+  get("/delete_photo/:the_id_number", { :controller => "photos", :action => "delete_row"})
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
